@@ -16,7 +16,7 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="logo">
         <Link to="/">
-          <img src="/logo.png" alt="Campus Market" />
+          <h1>campus market</h1>
         </Link>
       </div>
       <div className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
