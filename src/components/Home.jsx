@@ -4,6 +4,7 @@ import './Home.css';
 const Home = () => {
   return (
     <div className="home">
+      <h1>added</h1>
       <div className="hero-section">
         <h1>Welcome to Campus Market</h1>
         <p>Your one-stop shop for all your needs</p>
