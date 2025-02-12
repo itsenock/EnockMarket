@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import './SellerForm.css';
 
@@ -163,6 +164,10 @@ const SellerForm = ({ onAddProduct }) => {
       </form>
     </div>
   );
+};
+
+SellerForm.propTypes = {
+  onAddProduct: PropTypes.func.isRequired,
 };
 
 export default SellerForm;

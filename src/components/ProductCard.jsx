@@ -1,4 +1,4 @@
-// ProductCard.js
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './ProductCard.css';
 
@@ -15,6 +15,16 @@ const ProductCard = ({ product }) => {
       </Link>
     </div>
   );
+};
+
+ProductCard.propTypes = {
+  product: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    images: PropTypes.arrayOf(PropTypes.string).isRequired,
+    price: PropTypes.number.isRequired,
+    category: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default ProductCard;

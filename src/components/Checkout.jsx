@@ -17,7 +17,7 @@ const Checkout = () => {
 
   const handlePaymentMethodChange = (e) => {
     setPaymentMethod(e.target.value);
-    setConfirmationMessage(''); // Reset confirmation message when changing payment method
+    setConfirmationMessage(''); 
   };
 
   const handleProceedToPayment = () => {
@@ -27,9 +27,9 @@ const Checkout = () => {
     }
 
     if (paymentMethod === 'M-Pesa') {
-      setConfirmationMessage(`Confirm payment of Ksh ${totalAmount.toFixed(2)} from your M-Pesa account. After confirming, check your phone for a pop-up and enter your M-Pesa PIN.`);
+      setConfirmationMessage(`Confirm payment of Ksh ${totalAmount.toFixed(2)} from your M-Pesa account.`);
     } else {
-      // Handle other payment methods
+      
       alert(`Proceeding with ${paymentMethod} payment.`);
     }
   };
@@ -37,7 +37,6 @@ const Checkout = () => {
   const handleConfirmPayment = async () => {
     if (paymentMethod === 'M-Pesa') {
       try {
-        // const response = await lipaNaMpesaOnline(totalAmount, phoneNumber, 'Account Reference', 'Payment Description');
         alert('Payment request sent. Please check your phone for a pop-up and enter your M-Pesa PIN.');
       } catch (error) {
         alert('Payment failed. Please try again.');

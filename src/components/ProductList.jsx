@@ -1,4 +1,5 @@
-import  { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './ProductList.css';
 
@@ -43,6 +44,19 @@ const ProductList = ({ products }) => {
       ))}
     </div>
   );
+};
+
+ProductList.propTypes = {
+  products: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
+    condition: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    warranty: PropTypes.string,
+    images: PropTypes.arrayOf(PropTypes.string).isRequired,
+  })).isRequired,
 };
 
 export default ProductList;
