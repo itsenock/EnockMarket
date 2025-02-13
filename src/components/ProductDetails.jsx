@@ -29,6 +29,7 @@ const ProductDetails = ({ products }) => {
 
   return (
     <div className="product-details">
+    <div className='detailed-image'>
       <div className="main-image-reviews">
         <img src={mainImage} alt={product.name} />
         <div className="thumbnail-images">
@@ -41,7 +42,18 @@ const ProductDetails = ({ products }) => {
             />
           ))}
         </div>
-        <div className="reviews">
+    
+      </div>
+      <div className="product-info">
+        <h2>{product.name}</h2>
+        <p>{product.description}</p>
+        <p>Price: {product.price} USD</p>
+        {product.warranty && <p>Warranty: {product.warranty}</p>}
+        <p>Rating: {product.rating} / 5</p>
+        <button onClick={handleAddToCart}>Add to Cart</button>
+      </div>
+      </div>
+      <div className="reviews">
           <h3>Customer Reviews</h3>
           {product.reviews && product.reviews.length > 0 ? (
             product.reviews.map((review, index) => (
@@ -55,15 +67,7 @@ const ProductDetails = ({ products }) => {
             <p>No reviews yet.</p>
           )}
         </div>
-      </div>
-      <div className="product-info">
-        <h2>{product.name}</h2>
-        <p>{product.description}</p>
-        <p>Price: {product.price} USD</p>
-        {product.warranty && <p>Warranty: {product.warranty}</p>}
-        <p>Rating: {product.rating} / 5</p>
-        <button onClick={handleAddToCart}>Add to Cart</button>
-      </div>
+
     </div>
   );
 };

@@ -24,18 +24,30 @@ const SellerForm = ({ onAddProduct }) => {
     'Home Appliances',
   ];
 
-  const Change = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setItemData({ ...itemData, [name]: value });
   };
 
-  const ImageUpload = (e) => {
+  const handleImageUpload = (e) => {
     const files = Array.from(e.target.files);
     const imageUrls = files.map((file) => URL.createObjectURL(file));
-    setItemData({ ...itemData, images: imageUrls });
+    if (itemData.images.length + imageUrls.length <= 4) {
+      setItemData({ ...itemData, images: [...itemData.images, ...imageUrls] });
+    } else {
+      alert('You can only upload up to 4 images.');
+    }
   };
 
-  const Submit = (e) => {
+  const handleRemoveImage = (e, url) => {
+    e.stopPropagation();
+    setItemData({
+      ...itemData,
+      images: itemData.images.filter((image) => image !== url),
+    });
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     if (
@@ -48,7 +60,10 @@ const SellerForm = ({ onAddProduct }) => {
       return;
     }
 
-    if (itemData.condition === 'New' && itemData.category === 'Electronics') {
+    if (
+      (itemData.condition === 'New' || itemData.condition === 'Refurbished') &&
+      (itemData.category === 'Electronics' || itemData.category === 'Computers')
+    ) {
       itemData.warranty = itemData.warranty || '1 Year';
     } else {
       itemData.warranty = 'No Warranty';
@@ -77,52 +92,77 @@ const SellerForm = ({ onAddProduct }) => {
   };
 
   return (
-    <div className="seller-form">
-      <h2>Sell an Item</h2>
-      <form onSubmit={Submit}>
-        <label>
-          Item Name:
-          <input
-            type="text"
-            name="name"
-            value={itemData.name}
-            onChange={Change}
-            required
-          />
-        </label>
-        <label>
-          Category:
-          <select
-            name="category"
-            value={itemData.category}
-            onChange={Change}
-          >
-            {categories.map((cat, idx) => (
-              <option value={cat} key={idx}>
-                {cat}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label>
-          Condition:
-          <select
-            name="condition"
-            value={itemData.condition}
-            onChange={Change}
-          >
-            <option value="New">New</option>
-            <option value="Second Hand">Second Hand</option>
-          </select>
-        </label>
-        {itemData.condition === 'New' &&
-          itemData.category === 'Electronics' && (
+    <div className="sellerForm-container">
+      <div className="seller-form">
+        <h2>Item Details</h2>
+        <form onSubmit={handleSubmit}>
+          <label>
+            Item Name:
+            <input
+              type="text"
+              name="name"
+              value={itemData.name}
+              onChange={handleChange}
+              required
+            />
+          </label>
+          <label>
+            Category:
+            <select
+              name="category"
+              value={itemData.category}
+              onChange={handleChange}
+            >
+              {categories.map((cat, idx) => (
+                <option value={cat} key={idx}>
+                  {cat}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label>
+            Condition:
+            <div>
+              <label>
+                <input
+                  type="radio"
+                  name="condition"
+                  value="New"
+                  checked={itemData.condition === 'New'}
+                  onChange={handleChange}
+                />
+                New
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="condition"
+                  value="Used"
+                  checked={itemData.condition === 'Used'}
+                  onChange={handleChange}
+                />
+                Used
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="condition"
+                  value="Refurbished"
+                  checked={itemData.condition === 'Refurbished'}
+                  onChange={handleChange}
+                />
+                Refurbished
+              </label>
+            </div>
+          </label>
+          {(itemData.condition === 'New' || itemData.condition === 'Refurbished') &&
+            (itemData.category === 'Electronics' || itemData.category === 'Computers') && (
             <label>
               Warranty:
               <select
                 name="warranty"
                 value={itemData.warranty}
-                onChange={Change}
+                onChange={handleChange}
                 required
               >
                 <option value="">Select Warranty</option>
@@ -131,37 +171,57 @@ const SellerForm = ({ onAddProduct }) => {
               </select>
             </label>
           )}
-        <label>
-          Price:
-          <input
-            type="number"
-            name="price"
-            value={itemData.price}
-            onChange={Change}
-            required
-          />
-        </label>
-        <label>
-          Description:
-          <textarea
-            name="description"
-            value={itemData.description}
-            onChange={Change}
-            required
-          ></textarea>
-        </label>
-        <label>
-          Upload Images:
-          <input
-            type="file"
-            multiple
-            accept="image/*"
-            onChange={ImageUpload}
-            required
-          />
-        </label>
-        <button type="submit">Submit Item</button>
-      </form>
+          <label>
+            Price:
+            <input
+              type="number"
+              name="price"
+              value={itemData.price}
+              onChange={handleChange}
+              required
+            />
+          </label>
+          <label>
+            Description:
+            <textarea
+              name="description"
+              value={itemData.description}
+              onChange={handleChange}
+              required
+            ></textarea>
+          </label>
+          <label>
+            Upload Images:
+            <div className="image-upload">
+              <div className="upload-icon">
+                <input
+                  type="file"
+                  multiple
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  required
+                />
+                <span>+</span>
+              </div>
+              <div className="image-preview">
+                {itemData.images.map((url, idx) => (
+                  <div key={idx} className="image-container">
+                    <img src={url} alt={`Upload ${idx}`} />
+                    <button
+                      type="button"
+                      className="remove-image"
+                      onClick={(e) => handleRemoveImage(e, url)}
+                    >
+                      ×
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </label>
+          <button type="submit">Submit Item</button>
+        </form>
+      </div>
     </div>
   );
 };

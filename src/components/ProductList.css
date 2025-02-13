@@ -1,5 +1,6 @@
 
 .product-list-page {
+  margin-top: 60px;
   padding: 20px;
   background-color: #f8f8f8;
 }
@@ -71,6 +72,9 @@
     flex-wrap: wrap;
   }
   .product-card{
-    width: 140px;
+    width: 155px;
+  }
+  .product-list-page{
+    margin-top: 50px;
   }
 }

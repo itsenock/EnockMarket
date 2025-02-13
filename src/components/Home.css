@@ -3,7 +3,7 @@
   font-family: 'Arial', sans-serif;
   background-color: #f8f8f8;
   color: #333;
-  animation: fadeIn 1s ease-in-out
+  animation: fadeIn 1s ease-in-out;
 }
 
 .hero-section {
@@ -65,7 +65,7 @@
 }
 
 .categories-section {
-  padding: 50px 20px;
+  padding: 10px 20px;
   text-align: center;
 }
 
@@ -91,7 +91,7 @@
   border-radius: 15px;
   overflow: hidden;
   width: 280px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 3px rgba(0, 0, 0, 0.4);
   transition: transform 0.3s;
 }
 
