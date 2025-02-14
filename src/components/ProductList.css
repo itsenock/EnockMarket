@@ -72,9 +72,10 @@
     flex-wrap: wrap;
   }
   .product-card{
-    width: 45%;
+    width: 46%;
   }
   .product-list-page{
+    padding: 5px;
     margin-top: 50px;
   }
 }

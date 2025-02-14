@@ -117,22 +117,32 @@
 @media(max-width:450px){
   .product-details {
     display: flex;
+    width: 100vw;
     flex-wrap: wrap;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
     gap: 20px;
-    padding: 70px 20px 10px 0; 
+    padding: 70px 0 10px 0; 
+  }
+
+  .detailed-image{
+    display: flex;
+    flex-direction: column;
+    width: 90vw;
+  }
+  .main-image-reviews img {
+    width: 90vw;
+    height: 60vh;
+    margin-top: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   .thumbnail-images img {
     width: 60px;
     height: 60px;
     cursor: pointer;
     border: 2px solid transparent;
-  }
-  .detailed-image{
-    display: flex;
-    flex-direction: column;
   }
  
 }
