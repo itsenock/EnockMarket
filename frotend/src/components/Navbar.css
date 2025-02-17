@@ -1,0 +1,101 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5px;
+  color : black;
+  background-color:#fff;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 1000;
+  box-shadow: 0 0 10px rgba(87, 74, 74, 0.8);
+  animation: fadeIn 1s ease-in-out;
+}
+
+.logo h1 { 
+  background-image: url(https://images.pexels.com/photos/30642837/pexels-photo-30642837/free-photo-of-fresh-variety-of-tomatoes-at-market-stall.jpeg?auto=compress&cs=tinysrgb&w=400);
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  object-fit: cover;
+  font-size: 30px;
+}
+
+.nav-links  {
+  margin-right: 50px;
+  display: flex;
+  gap: 20px;
+  transition:filter 300ms;
+}
+.nav-links:has(:hover) :not(:hover){
+  scale: 0.8;
+  filter: blur(1px);
+}
+
+.nav-links a {
+  border:none;
+  border-radius: 20%;
+  box-shadow: 5px 5px #525d69;
+  color: black;
+  padding: 5px;
+  transition: 0.6s ease-out;
+  text-decoration: none;
+}
+
+.nav-links a:hover {
+  box-shadow: none;
+  transition: 0.6s ease-in;
+  transform: scale(1.05);
+}
+
+.menu-icon {
+  margin-right: 50px;
+  display: none;  
+  font-size: 24px;
+  cursor: pointer;
+  color: black;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 450px) {
+  .navbar{
+    justify-content: space-between;
+    width: 100vw;
+  }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    height: 35vh;
+    flex-direction: column;
+    width: 35%;
+    gap: 20px;
+    background-color: rgba(236, 225, 225, 0.952);
+    border-radius: 0 0 10% 10%;
+    padding: 10px 10px 10px 0;
+    box-shadow: 0 2px 10px rgba(27, 26, 26, 0.6);
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .menu-icon {
+    display: block;
+  }
+  .nav-links a{
+    text-align: center;
+    box-shadow:2px 5px #a2a8ad;
+  }
+}
